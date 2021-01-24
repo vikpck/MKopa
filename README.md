@@ -8,7 +8,7 @@ Assumptions:
 7) From testing perspective, I see this exercise as a pure container/integration test which is out of the scope of this exercise due to the time limit, yet I think a couple of component tests to check that the flow of the SmsConfirmationService is behaving correctly should be in place. 
 
 what is missing:
-1) the concrete implementation of ISmsClient IEventRaiser ISmsSubscription
+1) the concrete implementation of ISmsClient IEventRaiser ISmsSubscription (to be implemented with asbtraction for dependencies)
 2) container/integration test
 3) containerization 
 
