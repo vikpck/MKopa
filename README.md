@@ -2,11 +2,10 @@ Assumptions:
 1) No validation is required for the body
 2) for the simplicity of the wrapper I don't see the point of command/handler if required and we think things might go out of hand for this tiny microservice then a mediator package can be used to help add an abstraction layer.
 3) I assumed that the errors coming from any system is a list of key value pair.
-4) As the client used to get messages from queue is not yet decided I am leaving the serialization and mapping out of the implementation and this should be implemented when the technology is known and the correct library is picked. this can be done in SmsConfirmationService or we can leave it to the subscription handler. using automapper and .net core JsonSerializer which will be mapped to SendSmsCommand in my implementation.
-5) I am also assuming that the queue client will able to handle retry policy if that is not the case then we need to implement a retry policy this is to return message back to the queues to be proccessed again until it is a dead letter
-6) All configuration will be injected using the IConfiguration extension.
-7) the retry policy for the httpclient will include retriable errors >= 500 and smaller than 600 and 409 reference https://www.envoyproxy.io/docs/envoy/latest/configuration/http/http_filters/router_filter#x-envoy-retry-on
-8) From testing perspective, I see this exercise as a pure container/integration test which is out of the scope of this exercise due to the time limit, yet I think a couple of component tests to check that the flow of the SmsConfirmationService is behaving correctly should be in place. 
+4) I am also assuming that the queue client will able to handle retry policy if that is not the case then we need to implement a retry policy this is to return message back to the queues to be proccessed again until it is a dead letter
+5) All configuration will be injected using the IConfiguration extension.
+6) the retry policy for the httpclient will include retriable errors >= 500 and smaller than 600 and 409 reference https://www.envoyproxy.io/docs/envoy/latest/configuration/http/http_filters/router_filter#x-envoy-retry-on
+7) From testing perspective, I see this exercise as a pure container/integration test which is out of the scope of this exercise due to the time limit, yet I think a couple of component tests to check that the flow of the SmsConfirmationService is behaving correctly should be in place. 
 
 what is missing:
 1) the concrete implementation of ISmsClient IEventRaiser
