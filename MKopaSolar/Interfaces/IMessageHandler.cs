@@ -1,9 +1,10 @@
 ﻿using System.Threading.Tasks;
+using MKopaSolar.Contracts.Commands;
 
 namespace MKopaSolar.Interfaces
 {
     public interface IMessageHandler
     {
-        Task Handle(byte[] body);
+        Task Handle(SendSmsCommand body);
     }
 }

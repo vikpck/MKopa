@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
+using MKopaSolar.Contracts.Commands;
 using MKopaSolar.Contracts.Messages;
 using MKopaSolar.Interfaces;
 
@@ -11,13 +12,17 @@ namespace MKopaSolar
         private IQueueClient<IMessage> _queueCient;
         private ILogger _logger;
         private IMessageHandler _messageHandler;
+        private ISerializer _serializer;
 
-        public SmsSubscription(IQueueClient<IMessage> queueCient,
-            ILogger logger, IMessageHandler messageHandler)
+        public SmsSubscription(
+            IQueueClient<IMessage> queueCient,
+            ILogger logger,
+            IMessageHandler messageHandler, ISerializer serializer)
         {
             _queueCient = queueCient;
             _logger = logger;
             _messageHandler = messageHandler;
+            _serializer = serializer;
             _queueCient.Connect();
         }
 
@@ -34,11 +39,11 @@ namespace MKopaSolar
             }
         }
 
-        private async Task HandleMessage(IMessage message, CancellationToken ct)
+        private async Task HandleMessage(IMessage message)
         {
             try
             {
-                await _messageHandler.Handle(message.Body);
+                await _messageHandler.Handle(_serializer.Deserialize<SendSmsCommand>(message.Body));
                 await CompleteMessage(message);
             }
             catch (Exception ex)

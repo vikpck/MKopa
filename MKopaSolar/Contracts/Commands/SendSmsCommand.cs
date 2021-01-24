@@ -1,8 +1,9 @@
-﻿namespace MKopaSolar.Contracts.Commands
+﻿using MKopaSolar.Contracts.common;
+
+namespace MKopaSolar.Contracts.Commands
 {
-    public class SendSmsCommand
+    public class SendSmsCommand: SharedProperties
     {
-        public string PhoneNumber { get; set; }
-        public string SmsText { get; set; }
+    
     }
 }

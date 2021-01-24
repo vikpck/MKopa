@@ -8,7 +8,7 @@ namespace MKopaSolar.Interfaces
     public interface IQueueClient<T> where  T : IMessage
     {
         Task Connect();
-        Task RegisterMessageHandler(Func<T, CancellationToken, Task> handler);
+        Task RegisterMessageHandler(Func<T, Task> handler);
         Task AbandonAsync(T message);
         Task CompleteAsync(T message);
     }
