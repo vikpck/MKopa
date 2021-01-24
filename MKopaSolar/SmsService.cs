@@ -21,36 +21,20 @@ namespace MKopaSolar
         }
         public async Task SendAndRaise(SendSmsCommand body)
         {
-            try
-            {
-                var clientErrors = await _smsClient.Send(body);
 
-                if (clientErrors != null && clientErrors.Any())
-                {
-                    _logger.LogError($"Failed To send phone number {body.PhoneNumber} and message {body.SmsText}");
-                }
-            }
-            catch (Exception ex)
+            var clientErrors = await _smsClient.Send(body);
+
+            if (clientErrors != null && clientErrors.Any())
             {
-                _logger.LogError(ex, "Failed to send sms client");
-                throw;
+                _logger.LogError($"Failed To send phone number {body.PhoneNumber} and message {body.SmsText}");
             }
 
-            try
-            {
-                var eventPublisherError = await _eventPublisher.Raise(new SmsSentEvent());
+            var eventPublisherError = await _eventPublisher.Raise(new SmsSentEvent());
 
-                if (eventPublisherError != null && eventPublisherError.Any())
-                {
-                    _logger.LogError($"Failed To raise Sms Sent Event to phone number {body.PhoneNumber} and message {body.SmsText}");
-                }
-            }
-            catch (Exception ex)
+            if (eventPublisherError != null && eventPublisherError.Any())
             {
-                _logger.LogError(ex, "Failed to send event hub");
-                throw;
+                _logger.LogError($"Failed To raise Sms Sent Event to phone number {body.PhoneNumber} and message {body.SmsText}");
             }
-
         }
     }
 }

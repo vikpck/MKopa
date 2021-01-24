@@ -21,15 +21,7 @@ namespace MKopaSolar
 
         public async Task Handle(byte[] body)
         {
-            try
-            {
-                await _smsService.SendAndRaise(_serializer.Deserialize<SendSmsCommand>(body));
-            }
-            catch (Exception ex)
-            {
-                _logger.LogWarning(ex, "Handling Message Failed {@body}", body);
-                throw;
-            }
+            await _smsService.SendAndRaise(_serializer.Deserialize<SendSmsCommand>(body));
         }
     }
 }
