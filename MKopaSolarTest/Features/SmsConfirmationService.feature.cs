@@ -19,7 +19,7 @@ namespace MKopaSolarTest.Features
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("TechTalk.SpecFlow", "3.4.0.0")]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public partial class SmsConfirmationServiceFeature : object, Xunit.IClassFixture<SmsConfirmationServiceFeature.FixtureData>, System.IDisposable
+    public partial class SmsServiceFeature : object, Xunit.IClassFixture<SmsServiceFeature.FixtureData>, System.IDisposable
     {
         
         private static TechTalk.SpecFlow.ITestRunner testRunner;
@@ -31,7 +31,7 @@ namespace MKopaSolarTest.Features
 #line 1 "SmsConfirmationService.feature"
 #line hidden
         
-        public SmsConfirmationServiceFeature(SmsConfirmationServiceFeature.FixtureData fixtureData, MKopaSolarTest_XUnitAssemblyFixture assemblyFixture, Xunit.Abstractions.ITestOutputHelper testOutputHelper)
+        public SmsServiceFeature(SmsServiceFeature.FixtureData fixtureData, MKopaSolarTest_XUnitAssemblyFixture assemblyFixture, Xunit.Abstractions.ITestOutputHelper testOutputHelper)
         {
             this._testOutputHelper = testOutputHelper;
             this.TestInitialize();
@@ -40,7 +40,7 @@ namespace MKopaSolarTest.Features
         public static void FeatureSetup()
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
-            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Features", "SmsConfirmationService", null, ProgrammingLanguage.CSharp, ((string[])(null)));
+            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Features", "SmsService", null, ProgrammingLanguage.CSharp, ((string[])(null)));
             testRunner.OnFeatureStart(featureInfo);
         }
         
@@ -81,7 +81,7 @@ namespace MKopaSolarTest.Features
         }
         
         [Xunit.SkippableTheoryAttribute(DisplayName="Throw Exception When The SmsClient Retrunes Any Error")]
-        [Xunit.TraitAttribute("FeatureTitle", "SmsConfirmationService")]
+        [Xunit.TraitAttribute("FeatureTitle", "SmsService")]
         [Xunit.TraitAttribute("Description", "Throw Exception When The SmsClient Retrunes Any Error")]
         [Xunit.InlineDataAttribute("Failed To send phone number {0} and message {1}", new string[0])]
         public virtual void ThrowExceptionWhenTheSmsClientRetrunesAnyError(string error, string[] exampleTags)
@@ -117,7 +117,7 @@ this.ScenarioInitialize(scenarioInfo);
  testRunner.And("client is returning an error", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
 #line 6
- testRunner.When("smsConfirmationService try to send command", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+ testRunner.When("SmsService try to send command", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
 #line 7
  testRunner.Then(string.Format("the exception \'{0}\' should be Thrown", error), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
@@ -127,7 +127,7 @@ this.ScenarioInitialize(scenarioInfo);
         }
         
         [Xunit.SkippableTheoryAttribute(DisplayName="Throw Exception When The EventPublisher Retrunes Any Error")]
-        [Xunit.TraitAttribute("FeatureTitle", "SmsConfirmationService")]
+        [Xunit.TraitAttribute("FeatureTitle", "SmsService")]
         [Xunit.TraitAttribute("Description", "Throw Exception When The EventPublisher Retrunes Any Error")]
         [Xunit.InlineDataAttribute("Failed To raise Sms Sent Event to phone number {0} and message {1}", new string[0])]
         public virtual void ThrowExceptionWhenTheEventPublisherRetrunesAnyError(string error, string[] exampleTags)
@@ -166,7 +166,7 @@ this.ScenarioInitialize(scenarioInfo);
  testRunner.And("eventpublisher is returning an error", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
 #line 16
- testRunner.When("smsConfirmationService try to raise event", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+ testRunner.When("SmsService try to raise event", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
 #line 17
  testRunner.Then(string.Format("the exception \'{0}\' should be Thrown", error), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
@@ -176,7 +176,7 @@ this.ScenarioInitialize(scenarioInfo);
         }
         
         [Xunit.SkippableFactAttribute(DisplayName="No Exception Is Thrown When The EventPublisher And SmsClient Retrunes No Error")]
-        [Xunit.TraitAttribute("FeatureTitle", "SmsConfirmationService")]
+        [Xunit.TraitAttribute("FeatureTitle", "SmsService")]
         [Xunit.TraitAttribute("Description", "No Exception Is Thrown When The EventPublisher And SmsClient Retrunes No Error")]
         public virtual void NoExceptionIsThrownWhenTheEventPublisherAndSmsClientRetrunesNoError()
         {
@@ -213,7 +213,7 @@ this.ScenarioInitialize(scenarioInfo);
  testRunner.And("we have a command to send", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
 #line 26
- testRunner.When("smsConfirmationService try to raise event", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+ testRunner.When("SmsService try to raise event", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
 #line 27
  testRunner.Then("no exception should be Thrown", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
@@ -232,12 +232,12 @@ this.ScenarioInitialize(scenarioInfo);
             
             public FixtureData()
             {
-                SmsConfirmationServiceFeature.FeatureSetup();
+                SmsServiceFeature.FeatureSetup();
             }
             
             void System.IDisposable.Dispose()
             {
-                SmsConfirmationServiceFeature.FeatureTearDown();
+                SmsServiceFeature.FeatureTearDown();
             }
         }
     }

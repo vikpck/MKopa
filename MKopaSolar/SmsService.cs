@@ -7,13 +7,13 @@ using MKopaSolar.Interfaces;
 
 namespace MKopaSolar
 {
-    public class SmsConfirmationService: ISmsConfirmationService
+    public class SmsService: ISmsService
     {
         private ISmsClient _smsClient;
         private IEventRaiser<IEvent> _eventPublisher;
 
 
-        public SmsConfirmationService(ISmsClient smsClient, IEventRaiser<IEvent> eventPublisher)
+        public SmsService(ISmsClient smsClient, IEventRaiser<IEvent> eventPublisher)
         {
             _smsClient = smsClient;
             _eventPublisher = eventPublisher;

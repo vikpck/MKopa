@@ -12,18 +12,14 @@ namespace MKopaSolar
     {
         private IQueueClient<IMessage> _queueCient;
         private ILogger _logger;
-        private ISmsConfirmationService _smsConfirmationService;
-        private ISerializer _serialiser;
+        private IMessageHandler _messageHandler;
 
         public SmsSubscription(IQueueClient<IMessage> queueCient,
-            ILogger logger,
-            ISmsConfirmationService smsConfirmationService,
-            ISerializer serialiser)
+            ILogger logger, IMessageHandler messageHandler)
         {
             _queueCient = queueCient;
             _logger = logger;
-            _smsConfirmationService = smsConfirmationService;
-            _serialiser = serialiser;
+            _messageHandler = messageHandler;
             _queueCient.Connect();
         }
 
@@ -40,12 +36,11 @@ namespace MKopaSolar
             }
         }
 
-
         private async Task HandleMessage(IMessage message, CancellationToken ct)
         {
             try
             {
-                await _smsConfirmationService.SendAndRaise(_serialiser.Deserialize<SendSmsCommand>(message.Body));
+                await _messageHandler.Handle(message.Body);
                 await CompleteMessage(message);
             }
             catch (Exception ex)

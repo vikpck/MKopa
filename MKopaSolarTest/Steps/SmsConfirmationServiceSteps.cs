@@ -13,9 +13,9 @@ using TechTalk.SpecFlow;
 namespace MKopaSolarTest.Steps
 {
     [Binding]
-    public class SmsConfirmationServiceSteps
+    public class SmsServiceSteps
     {
-        private ISmsConfirmationService _smsConfirmationService;
+        private ISmsService _SmsService;
         private ISmsClient _smsClient;
         private IEventRaiser<IEvent> _eventRaiser;
         private SendSmsCommand _sendSmsCommand;
@@ -23,11 +23,11 @@ namespace MKopaSolarTest.Steps
         private Dictionary<string, string> _erros;
         private string _exceptionResult;
 
-        public SmsConfirmationServiceSteps()
+        public SmsServiceSteps()
         {
             _smsClient = Substitute.For<ISmsClient>();
             _eventRaiser = Substitute.For<IEventRaiser<IEvent>>();
-            _smsConfirmationService = new SmsConfirmationService(_smsClient, _eventRaiser);
+            _SmsService = new SmsService(_smsClient, _eventRaiser);
             
         }
 
@@ -63,12 +63,12 @@ namespace MKopaSolarTest.Steps
             _eventRaiser.Raise(Arg.Any<SmsSentEvent>()).Returns(Task.FromResult(_erros));
         }
         
-        [When(@"smsConfirmationService try to send command")]
-        public async void WhenSmsConfirmationServiceTryToSendCommand()
+        [When(@"SmsService try to send command")]
+        public async void WhenSmsServiceTryToSendCommand()
         {
             try
             {
-                await _smsConfirmationService.SendAndRaise(_sendSmsCommand);
+                await _SmsService.SendAndRaise(_sendSmsCommand);
             }
             catch (Exception ex)
             {
@@ -76,12 +76,12 @@ namespace MKopaSolarTest.Steps
             }
         }
         
-        [When(@"smsConfirmationService try to raise event")]
-        public async void WhenSmsConfirmationServiceTryToRaiseEvent()
+        [When(@"SmsService try to raise event")]
+        public async void WhenSmsServiceTryToRaiseEvent()
         {
             try
             {
-                await _smsConfirmationService.SendAndRaise(_sendSmsCommand);
+                await _SmsService.SendAndRaise(_sendSmsCommand);
             }
             catch (Exception ex)
             {

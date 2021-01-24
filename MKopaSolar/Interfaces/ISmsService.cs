@@ -3,7 +3,7 @@ using MKopaSolar.Contracts.Commands;
 
 namespace MKopaSolar.Interfaces
 {
-    public interface ISmsConfirmationService
+    public interface ISmsService
     {
         Task SendAndRaise(SendSmsCommand body);
     }
