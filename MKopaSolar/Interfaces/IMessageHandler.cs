@@ -7,6 +7,6 @@ namespace MKopaSolar.Interfaces
 {
     public interface IMessageHandler
     {
-        Task Handle(string body);
+        Task Handle(byte[] body);
     }
 }

@@ -2,6 +2,6 @@
 {
     public interface IMessage
     {
-        string Body { set; get; }
+        byte[] Body { set; get; }
     }
 }

@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
-using Microsoft.Extensions.Logging;
-using MKopaSolar.Contracts.Commands;
 using MKopaSolar.Contracts.Messages;
 using MKopaSolar.Interfaces;
 
@@ -45,7 +43,7 @@ namespace MKopaSolar
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Failed to send and raise message command {@message}", message);
+                _logger.LogError(ex, "Failed to handle {@message}", message);
                 await AbandonMessage(message);
                 throw;
             }

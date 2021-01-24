@@ -2,6 +2,6 @@
 {
     public interface ISerializer
     {
-        T Deserialize<T>(object model);
+        T Deserialize<T>(byte[] model);
     }
 }

@@ -22,13 +22,14 @@ namespace MKopaSolarTest.Steps
         private readonly Fixture _fixture = new Fixture();
         private Dictionary<string, string> _erros;
         private string _exceptionResult;
+        private ILogger _logger;
 
         public SmsServiceSteps()
         {
             _smsClient = Substitute.For<ISmsClient>();
             _eventRaiser = Substitute.For<IEventRaiser<IEvent>>();
-            _SmsService = new SmsService(_smsClient, _eventRaiser);
-            
+            _logger = Substitute.For<ILogger>();
+            _SmsService = new SmsService(_smsClient, _eventRaiser, _logger);
         }
 
         [Given(@"we have a command to send")]
@@ -43,17 +44,17 @@ namespace MKopaSolarTest.Steps
             _erros = _fixture.Create<Dictionary<string, string>>();
             _smsClient.Send(_sendSmsCommand).Returns(Task.FromResult(_erros));
         }
-        
+
         [Given(@"client is returning no errors")]
         public void GivenClientIsReturningNoErrors()
         {
-            _smsClient.Send(_sendSmsCommand).Returns(Task.FromResult(new Dictionary<string, string>(){}));
+            _smsClient.Send(_sendSmsCommand).Returns(Task.FromResult(new Dictionary<string, string>() { }));
         }
 
         [Given(@"EventPublisher is returning no errors")]
         public void GivenEventPublisherIsReturningNoErrors()
         {
-             _eventRaiser.Raise(Arg.Any<SmsSentEvent>()).Returns(Task.FromResult(new Dictionary<string, string>() { }));
+            _eventRaiser.Raise(Arg.Any<SmsSentEvent>()).Returns(Task.FromResult(new Dictionary<string, string>() { }));
         }
 
         [Given(@"eventpublisher is returning an error")]
@@ -62,38 +63,24 @@ namespace MKopaSolarTest.Steps
             _erros = _fixture.Create<Dictionary<string, string>>();
             _eventRaiser.Raise(Arg.Any<SmsSentEvent>()).Returns(Task.FromResult(_erros));
         }
-        
+
         [When(@"SmsService try to send command")]
         public async void WhenSmsServiceTryToSendCommand()
         {
-            try
-            {
-                await _SmsService.SendAndRaise(_sendSmsCommand);
-            }
-            catch (Exception ex)
-            {
-                _exceptionResult = ex.Message;
-            }
+            await _SmsService.SendAndRaise(_sendSmsCommand);
         }
-        
+
         [When(@"SmsService try to raise event")]
         public async void WhenSmsServiceTryToRaiseEvent()
         {
-            try
-            {
-                await _SmsService.SendAndRaise(_sendSmsCommand);
-            }
-            catch (Exception ex)
-            {
-                _exceptionResult = ex.Message;
-            }
+            await _SmsService.SendAndRaise(_sendSmsCommand);
         }
-        
-        [Then(@"the exception '(.*)' should be Thrown")]
+
+        [Then(@"the exception '(.*)' should be logged")]
         public void ThenTheExceptionShouldBeThrown(string error)
         {
-            error  = String.Format(error, _sendSmsCommand.PhoneNumber, _sendSmsCommand.SmsText);
-            error.Should().Be(_exceptionResult);
+            error = string.Format(error, _sendSmsCommand.PhoneNumber, _sendSmsCommand.SmsText);
+            _logger.Received().LogError(error);
         }
 
         [Then(@"no exception should be Thrown")]

@@ -120,7 +120,7 @@ this.ScenarioInitialize(scenarioInfo);
  testRunner.When("SmsService try to send command", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
 #line 7
- testRunner.Then(string.Format("the exception \'{0}\' should be Thrown", error), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.Then(string.Format("the exception \'{0}\' should be logged", error), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }
             this.ScenarioCleanup();
@@ -169,7 +169,7 @@ this.ScenarioInitialize(scenarioInfo);
  testRunner.When("SmsService try to raise event", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
 #line 17
- testRunner.Then(string.Format("the exception \'{0}\' should be Thrown", error), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.Then(string.Format("the exception \'{0}\' should be logged", error), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }
             this.ScenarioCleanup();

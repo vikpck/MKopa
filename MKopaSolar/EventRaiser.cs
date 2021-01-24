@@ -7,7 +7,7 @@ namespace MKopaSolar
 {
     public class EventRaiser<T> : IEventRaiser<T> where T : IEvent
     {
-        public Task<Dictionary<string, string>> Raise(T body)
+        public async Task<Dictionary<string, string>> Raise(T body)
         {
             throw new NotImplementedException();
         }
