@@ -13,7 +13,7 @@ namespace MKopaSolar
                 .BuildServiceProvider();
 
             //Message need to be known so this can be injected here and then below two lines can be uncommented
-            //var smsSubscriber = serviceProvider.GetService<ISmsSubscription<Message>>();
+            //var smsSubscriber = serviceProvider.GetService<SmsSubscription>();
             //smsSubscriber.Run();
         }
     }
