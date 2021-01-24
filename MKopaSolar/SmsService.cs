@@ -1,5 +1,4 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using System.Threading.Tasks;
 using MKopaSolar.Contracts.Commands;
 using MKopaSolar.Contracts.Events;
@@ -21,7 +20,6 @@ namespace MKopaSolar
         }
         public async Task SendAndRaise(SendSmsCommand body)
         {
-
             var clientErrors = await _smsClient.Send(body);
 
             if (clientErrors != null && clientErrors.Any())

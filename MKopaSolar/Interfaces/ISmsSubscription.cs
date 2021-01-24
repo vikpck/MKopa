@@ -1,5 +1,4 @@
-﻿
-namespace MKopaSolar.Interfaces
+﻿namespace MKopaSolar.Interfaces
 {
     public interface ISmsSubscription
     {

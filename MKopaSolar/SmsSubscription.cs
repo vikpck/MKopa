@@ -74,6 +74,5 @@ namespace MKopaSolar
                 throw;
             }
         }
-
     }
 }
