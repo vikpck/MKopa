@@ -1,7 +1,7 @@
 Assumptions:
 1) No validation is required for the body
 2) for the simplicity of the wrapper I don't see the point of command/handler if required and we think things might go out of hand for this tiny Microservice then a mediator package can be used to help add an abstraction layer.
-3) I assumed that the errors coming from any system is a list of key value pair.
+3) I assumed that the errors coming from any system is a list of key value pair. for simplicity
 4) for simplicity the body of the message is similar to the command so no mapping required only deserialization
 5) I am also assuming that the queue client will able to handle retry policy if that is not the case then we need to implement a retry policy this is to return message back to the queues to be processed again until it is a dead letter
 6) All configuration will be injected using the IConfiguration extension.
